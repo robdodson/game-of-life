@@ -24,6 +24,7 @@ td {
   width: var(--cell-size);
   height: var(--cell-size);
   cursor: default;
+  user-select: none;
 }
 
 [data-alive] {
