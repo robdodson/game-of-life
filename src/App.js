@@ -26,19 +26,21 @@ function App({ rows, cols, delay }) {
 
   return (
     <div className="App">
-      {isAlive ? (
-        <LivingGrid seed={seed} delay={delay} />
-      ) : (
-        <SeedGrid seed={seed} setSeed={setSeed} />
-      )}
-
-      <div>
+      <div className="controls">
         <button onClick={handleStart} disabled={isAlive}>
           Start
         </button>
         <button onClick={handleRestart} disabled={!isAlive}>
           Restart
         </button>
+      </div>
+
+      <div className="board">
+        {isAlive ? (
+          <LivingGrid seed={seed} delay={delay} />
+        ) : (
+          <SeedGrid seed={seed} setSeed={setSeed} />
+        )}
       </div>
     </div>
   );

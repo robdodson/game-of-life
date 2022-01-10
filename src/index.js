@@ -5,7 +5,7 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App rows={20} cols={20} delay={200} />
+    <App rows={30} cols={50} delay={200} />
   </React.StrictMode>,
   document.getElementById('root')
 );

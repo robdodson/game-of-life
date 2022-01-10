@@ -55,9 +55,7 @@ export default function SeedGrid({ seed, setSeed }) {
                   data-row={i}
                   data-col={j}
                   data-alive={col === 1 ? '' : null}
-                >
-                  {col}
-                </td>
+                ></td>
               ))}
             </tr>
           ))}

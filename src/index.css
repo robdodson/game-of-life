@@ -8,6 +8,35 @@
   --cell-size: 24px;
 }
 
+html,
+body {
+  height: 100%;
+  background-color: black;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls > * + * {
+  margin-left: 8px;
+}
+
+.board {
+  margin-top: 16px;
+}
+
 table {
   font-family: monospace;
   text-align: center;
@@ -20,7 +49,7 @@ td {
 }
 
 td {
-  border: 1px solid black;
+  border: 1px solid #212529;
   width: var(--cell-size);
   height: var(--cell-size);
   cursor: default;
@@ -28,5 +57,5 @@ td {
 }
 
 [data-alive] {
-  background-color: lightseagreen;
+  background-color: white;
 }

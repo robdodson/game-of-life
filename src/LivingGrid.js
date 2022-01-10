@@ -10,9 +10,10 @@ export default function LivingGrid({ seed, delay }) {
           {grid.map((row, i) => (
             <tr key={'row-' + i}>
               {row.map((col, j) => (
-                <td key={`row${i}col${j}`} data-alive={col === 1 ? '' : null}>
-                  {col}
-                </td>
+                <td
+                  key={`row${i}col${j}`}
+                  data-alive={col === 1 ? '' : null}
+                ></td>
               ))}
             </tr>
           ))}
