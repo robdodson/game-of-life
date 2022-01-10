@@ -18,9 +18,6 @@ export default function LivingGrid({ seed, delay }) {
           ))}
         </tbody>
       </table>
-      <div>
-        <button disabled>Start</button>
-      </div>
     </div>
   );
 }

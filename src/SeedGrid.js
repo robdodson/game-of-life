@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 const TD = 'TD';
 
-export default function SeedGrid({ seed, setSeed, setIsAlive }) {
+export default function SeedGrid({ seed, setSeed }) {
   const isMouseDown = useRef(false);
   const toggleValue = useRef(1);
 
@@ -39,10 +39,6 @@ export default function SeedGrid({ seed, setSeed, setIsAlive }) {
     toggle(e.target);
   }
 
-  function handleStart() {
-    setIsAlive(true);
-  }
-
   return (
     <div className="SeedGrid">
       <table
@@ -67,9 +63,6 @@ export default function SeedGrid({ seed, setSeed, setIsAlive }) {
           ))}
         </tbody>
       </table>
-      <div>
-        <button onClick={handleStart}>Start</button>
-      </div>
     </div>
   );
 }

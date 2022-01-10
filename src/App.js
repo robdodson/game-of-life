@@ -15,13 +15,31 @@ function App({ rows, cols, delay }) {
   const [isAlive, setIsAlive] = useState(false);
   const [seed, setSeed] = useState(() => createSeed(rows, cols));
 
+  function handleStart() {
+    setIsAlive(true);
+  }
+
+  function handleRestart() {
+    setSeed(createSeed(rows, cols));
+    setIsAlive(false);
+  }
+
   return (
     <div className="App">
       {isAlive ? (
         <LivingGrid seed={seed} delay={delay} />
       ) : (
-        <SeedGrid seed={seed} setSeed={setSeed} setIsAlive={setIsAlive} />
+        <SeedGrid seed={seed} setSeed={setSeed} />
       )}
+
+      <div>
+        <button onClick={handleStart} disabled={isAlive}>
+          Start
+        </button>
+        <button onClick={handleRestart} disabled={!isAlive}>
+          Restart
+        </button>
+      </div>
     </div>
   );
 }
