@@ -19,9 +19,12 @@ function App({ rows, cols, delay }) {
     setIsAlive(true);
   }
 
-  function handleRestart() {
-    setSeed(createSeed(rows, cols));
+  function handleReset() {
     setIsAlive(false);
+  }
+
+  function handleClear() {
+    setSeed(createSeed(rows, cols));
   }
 
   return (
@@ -30,8 +33,11 @@ function App({ rows, cols, delay }) {
         <button onClick={handleStart} disabled={isAlive}>
           Start
         </button>
-        <button onClick={handleRestart} disabled={!isAlive}>
-          Restart
+        <button onClick={handleClear} disabled={isAlive}>
+          Clear
+        </button>
+        <button onClick={handleReset} disabled={!isAlive}>
+          Reset
         </button>
       </div>
 
