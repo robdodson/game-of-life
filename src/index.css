@@ -23,6 +23,7 @@ td {
   border: 1px solid black;
   width: var(--cell-size);
   height: var(--cell-size);
+  cursor: default;
 }
 
 [data-alive] {

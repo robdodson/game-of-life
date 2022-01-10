@@ -1,42 +1,27 @@
-import useLife from './lib/useLife';
+import range from './lib/range';
+import { useState } from 'react';
+import SeedGrid from './SeedGrid';
+import LivingGrid from './LivingGrid';
 
-// const seed = [
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-// ];
+function createSeed(rows, cols) {
+  let seed = [];
+  for (let i = 0; i < rows; i++) {
+    seed.push(range(cols));
+  }
+  return seed;
+}
 
-const grid = [
-  [1, 1, 0],
-  [0, 1, 0],
-  [0, 0, 0],
-];
+function App({ rows, cols, delay }) {
+  const [isAlive, setIsAlive] = useState(false);
+  const [seed, setSeed] = useState(() => createSeed(rows, cols));
 
-function App() {
   return (
     <div className="App">
-      <div className="Grid">
-        <table>
-          <tbody>
-            {grid.map((row, i) => (
-              <tr key={'row-' + i}>
-                {grid[i].map((col, j) => (
-                  <td key={`row${i}col${j}`} data-alive={col === 1 ? '' : null}>
-                    {col}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {isAlive ? (
+        <LivingGrid seed={seed} delay={delay} />
+      ) : (
+        <SeedGrid seed={seed} setSeed={setSeed} setIsAlive={setIsAlive} />
+      )}
     </div>
   );
 }

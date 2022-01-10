@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // - Any live cell with two or three live neighbours survives.
 // - Any dead cell with three live neighbours becomes a live cell.
@@ -12,7 +12,6 @@ import { useState } from 'react';
 // applied repeatedly to create further generations.
 
 function addNeighbors(grid, row, col) {
-  debugger;
   if (grid === null || grid.length === 0) {
     return 0;
   }
@@ -33,7 +32,7 @@ function tick(grid) {
   const rows = grid.length;
   const cols = grid[0].length;
 
-  let newGrid = [[]];
+  let newGrid = JSON.parse(JSON.stringify(grid));
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       const cell = grid[row][col];
@@ -43,8 +42,11 @@ function tick(grid) {
         if (sum === 3) {
           // Dead cell is reborn!
           newGrid[row][col] = 1;
-          continue;
+        } else {
+          // Dead cell remains dead
+          newGrid[row][col] = 0;
         }
+        continue;
       }
 
       if (sum > 1 && sum < 4) {
@@ -63,12 +65,38 @@ function tick(grid) {
   return newGrid;
 }
 
-export default function useLife(seed) {
+export function useLifeDebug(seed, delay = 1000) {
   const [grid, setGrid] = useState(seed);
 
-  setInterval(() => {
-    setGrid((grid) => tick(grid));
-  }, 1000);
+  useEffect(() => {
+    function doSomething(e) {
+      if (e.key === 'ArrowRight') {
+        let newGrid = tick(grid);
+        setGrid(newGrid);
+      }
+    }
+    window.addEventListener('keyup', doSomething);
+
+    return () => {
+      window.removeEventListener('keyup', doSomething);
+    };
+  }, [grid]);
+
+  return grid;
+}
+
+export default function useLife(seed, delay = 200) {
+  const [grid, setGrid] = useState(seed);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setGrid(tick(grid));
+    }, delay);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [grid, delay]);
 
   return grid;
 }
